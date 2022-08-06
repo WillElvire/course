@@ -1,0 +1,47 @@
+<body>
+  <div class="container">
+    <br>
+    <br>
+    <br>
+    <h3 class="text-center text-white ">ToDo creator</h3>
+    <div class="card mt-4">
+      <div class="card-body">
+        <div class="alert alert-success" *ngIf="isSaved">toDo saved</div>
+        <label>Todo message</label>
+        <input type="text" class="form-control" [(ngModel)]="message" />
+        <button tuiButton (click)="saveTodo()" appearance="custom" class="mt-2">
+          save
+        </button>
+      </div>
+    </div>
+
+    <div class="card mt-5">
+      <div class="card-body">
+        <table class="table ">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">message</th>
+              <th scope="col">status</th>
+              <th scope="col">action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let toDo of myToDoList?.activities;let index=index">
+              <th scope="row">{{ toDo?.text }}</th>
+              <td>
+                <tui-toggle
+                [showIcons]="true"
+                ></tui-toggle>
+              </td>
+              <td>
+                <button tuiButton (click)="update(index)" appearance="custom">Modify</button>
+                <app-modification (toDoComment)="fetchUpdate($event)" [toDoId]="element" *ngIf="loadComponent"></app-modification>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</body>
